@@ -21,3 +21,27 @@ body {
   color: var(--text-color);
   transition: all 0.3s ease;
 }
+
+.toggleButton {
+  background: var(--button-bg, #f0f0f0);
+  color: var(--text-color);
+  border: 1px solid var(--border-color, #ccc);
+  padding: 8px 16px;
+  font-size: 0.9rem;
+  font-weight: 500;
+  border-radius: 20px;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  transition: all 0.2s ease-in-out;
+}
+
+.toggleButton:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.toggleButton:active {
+  transform: translateY(0);
+}
