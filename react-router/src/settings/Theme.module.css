@@ -1,0 +1,23 @@
+/**
+ * Theme.module.css
+ * This CSS module defines the theme variables for light and dark modes.
+ * It uses CSS custom properties (variables) to allow easy theming across the application.
+ */
+
+ /* Define the default theme variables for light mode */
+:root {
+  --bg-color: #ffffff;
+  --text-color: #333333;
+}
+
+/* Define the theme variables for dark mode */
+[data-theme='dark'] {
+  --bg-color: #121212;
+  --text-color: #e0e0e0;
+}
+
+body {
+  background-color: var(--bg-color);
+  color: var(--text-color);
+  transition: all 0.3s ease;
+}
