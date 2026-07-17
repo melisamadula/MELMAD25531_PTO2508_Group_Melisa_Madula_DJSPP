@@ -11,6 +11,8 @@ import styles from "./Home.module.css";
 import { genres } from "../data";
 import { PodcastContext } from "../context/PodcastContext";
 import { useContext } from "react";
+import Carousel from "../settings/carousel.jsx";
+import PodcastCard from "../components/Podcasts/PodcastCard";
 
 /**
  * Home page of the Podcast Explorer app.
@@ -28,8 +30,21 @@ import { useContext } from "react";
 export default function Home() {
   const { podcasts, loading, error } = useContext(PodcastContext);
 
+  // Safely take the first 5 podcasts to feature in the carousel
+  const featuredPodcasts = Array.isArray(podcasts) ? podcasts.slice(0, 5) : [];
+
   return (
     <main className={styles.main}>
+      {!loading && !error && featuredPodcasts.length > 0 && (
+        <div className={styles.carouselContainer}>
+          <Carousel>
+            {featuredPodcasts.map((podcast) => (
+              <PodcastCard key={podcast.id} podcast={podcast} />
+            ))}
+          </Carousel>
+        </div>
+      )}
+      
       <section className={styles.controls}>
         <SearchBar />
         <GenreFilter genres={genres} />
