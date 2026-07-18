@@ -1,0 +1,74 @@
+.carouselContainer {
+  position: relative;
+  width: 100%;
+  margin: 2rem auto;
+  padding: 0 50px; /* Leaves space for the floating side buttons */
+  box-sizing: border-box;
+}
+
+/* Acts as the window that hides cards outside the view boundaries */
+.wrapper {
+  overflow: hidden;
+  width: 100%;
+}
+
+/* The moving row holding all your cards side-by-side */
+.track {
+  display: flex;
+  gap: 20px; /* Adjust spacing between cards */
+  transition: transform 0.5s cubic-bezier(0.25, 1, 0.5, 1); /* Ultra smooth slide slide */
+  will-change: transform;
+}
+
+/* Standardizes the width of cards inside the carousel */
+.slide {
+  flex: 0 0 calc(33.333% - 14px); /* Default: Shows 3 cards at a time */
+  min-width: 250px; /* Prevents cards from getting too squished on tablet screens */
+}
+
+/* Navigation Buttons overlayed on top */
+.navButton {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: rgba(0, 0, 0, 0.7);
+  color: white;
+  border: none;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  font-size: 1.5rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 10;
+  transition: all 0.2s ease;
+}
+
+.navButton:hover:not(:disabled) {
+  background: rgba(0, 0, 0, 0.9);
+  transform: translateY(-50%) scale(1.1);
+}
+
+.navButton:disabled {
+  background: rgba(0, 0, 0, 0.2);
+  color: rgba(255, 255, 255, 0.3);
+  cursor: not-allowed;
+}
+
+.prev { left: 0; }
+.next { right: 0; }
+
+/* Responsive Adjustments */
+@media (max-width: 1024px) {
+  .slide {
+    flex: 0 0 calc(50% - 10px); /* Shows 2 cards at a time on small screens/tablets */
+  }
+}
+
+@media (max-width: 600px) {
+  .slide {
+    flex: 0 0 100%; /* Shows 1 card at a time on smartphones */
+  }
+}
