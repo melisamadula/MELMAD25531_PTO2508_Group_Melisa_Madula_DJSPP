@@ -195,6 +195,32 @@ strong {
   font-size: 0.875rem;
 }
 
+/* Container for heart icon and play button on the right */
+.actionsContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  margin-left: 1rem;
+  min-height: 80px; /* Ensures even vertical distribution */
+}
+
+/* Styling for the heart button */
+.favoriteButton {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.2s ease;
+}
+
+.favoriteButton:hover {
+  transform: scale(1.15);
+}
+
 @media (max-width: 600px) {
   .container {
     padding: 1rem;

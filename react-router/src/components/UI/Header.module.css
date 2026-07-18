@@ -10,3 +10,36 @@
   text-decoration: none;
   color: black;
 }
+
+/* Flex layout to keep items side-by-side and vertically aligned */
+.navActions {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+/* Styling for the new Favourites route link text click target */
+.favoritesLink {
+  text-decoration: none;
+  color: #0070f3;
+  font-weight: 600;
+  font-size: 0.95rem;
+  transition: color 0.2s ease, transform 0.2s ease;
+  display: inline-flex;
+  align-items: center;
+}
+
+.favoritesLink:hover {
+  color: #0059c1;
+  transform: scale(1.03);
+}
+
+/* Optional adjustment if you need the entire header container distributed layout */
+.appHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 2rem;
+  background-color: var(--header-bg, #ffffff); /* Fallback value variables */
+  border-bottom: 1px solid #e5e7eb;
+}
