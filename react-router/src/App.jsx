@@ -3,6 +3,7 @@ import Header from "./components/UI/Header";
 import Home from "./pages/Home";
 import ShowDetail from "./pages/ShowDetail";
 import { PodcastProvider } from "./context/PodcastContext";
+import AppPlayer from "./components/AudioPlayer";
 
 /**
  * Root component of the Podcast Explorer app.
@@ -25,6 +26,7 @@ export default function App() {
           <Route path={`/show/:id`} element={<ShowDetail />} />
         </Routes>
       </PodcastProvider>
+      <AppPlayer />
     </>
   );
 }

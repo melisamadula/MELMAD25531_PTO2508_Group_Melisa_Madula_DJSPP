@@ -1,13 +1,26 @@
-import { useState } from "react";
-import { useNavigate } from "react-router-dom"; // ← add this
+import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import styles from "./PodcastDetail.module.css";
 import { formatDate } from "../../utils/formatDate";
 import GenreTags from "../UI/GenreTags";
+import { useAudioPlayer } from "../../context/AudioPlayerContext";
 
 export default function PodcastDetail({ podcast, genres }) {
   const [selectedSeasonIndex, setSelectedSeasonIndex] = useState(0);
+  const [selectedEpisodeIndex, setSelectedEpisodeIndex] = useState(0);
   const season = podcast.seasons[selectedSeasonIndex];
-  const navigate = useNavigate(); // ← hook for navigation
+  const navigate = useNavigate();
+  const { playTrack } = useAudioPlayer();
+
+  useEffect(() => {
+    setSelectedEpisodeIndex(0);
+  }, [selectedSeasonIndex]);
+
+  const handlePlayEpisode = (episode) => {
+    if (episode?.file) {
+      playTrack(episode.file, `${podcast.title} • ${episode.title}`);
+    }
+  };
 
   return (
     <div className={styles.container}>
@@ -85,7 +98,19 @@ export default function PodcastDetail({ podcast, genres }) {
 
         <div className={styles.episodeList}>
           {season.episodes.map((ep, index) => (
-            <div key={index} className={styles.episodeCard}>
+            <div
+              key={index}
+              className={styles.episodeCard}
+              onClick={() => setSelectedEpisodeIndex(index)}
+              role="button"
+              tabIndex={0}
+              onKeyDown={(event) => {
+                if (event.key === "Enter" || event.key === " ") {
+                  event.preventDefault();
+                  setSelectedEpisodeIndex(index);
+                }
+              }}
+            >
               <img className={styles.episodeCover} src={season.image} alt="" />
               <div className={styles.episodeInfo}>
                 <p className={styles.episodeTitle}>
@@ -93,9 +118,23 @@ export default function PodcastDetail({ podcast, genres }) {
                 </p>
                 <p className={styles.episodeDesc}>{ep.description}</p>
               </div>
+              {ep.file && (
+                <button
+                  className={styles.playButton}
+                  type="button"
+                  onClick={(event) => {
+                    event.stopPropagation();
+                    handlePlayEpisode(ep);
+                  }}
+                  aria-label={`Play ${ep.title}`}
+                >
+                  ▶
+                </button>
+              )}
             </div>
           ))}
         </div>
+
       </div>
     </div>
   );
