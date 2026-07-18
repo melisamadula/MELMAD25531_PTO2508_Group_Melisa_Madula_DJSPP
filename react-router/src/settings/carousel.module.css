@@ -1,9 +1,26 @@
 .carouselContainer {
   position: relative;
   width: 100%;
-  margin: 2rem auto;
+  margin: 0 auto;
   padding: 0 50px; /* Leaves space for the floating side buttons */
   box-sizing: border-box;
+}
+
+/* Styling for the new outer container */
+.outerWrapper {
+  width: 100%;
+  margin: 2rem auto;
+}
+
+.carouselTitle {
+  font-family: sans-serif;
+  font-size: 1.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: #333333;
+  padding: 0 50px; /* Aligns perfectly with the edge of the cards */
+  margin-bottom: 1rem;
 }
 
 /* Acts as the window that hides cards outside the view boundaries */
@@ -12,7 +29,7 @@
   width: 100%;
 }
 
-/* The moving row holding all your cards side-by-side */
+/* The moving row holding all cards side-by-side */
 .track {
   display: flex;
   gap: 20px; /* Adjust spacing between cards */

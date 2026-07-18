@@ -63,38 +63,43 @@ export default function Carousel({ children, interval = 5000 }) {
     : 0;
 
   return (
-    <div className={styles.carouselContainer}>
-      {/* Left Trigger Button */}
-      <button 
-        className={`${styles.navButton} ${styles.prev}`} 
-        onClick={goToPrevious}
-        disabled={currentIndex === 0}
-      >
-        &#10094;
-      </button>
+    <div className={styles.outerWrapper}>
+      {/* Fixed Title Above Carousel */}
+      <h2 className={styles.carouselTitle}>RECOMMENDED SHOWS</h2>
 
-      {/* Main Viewport Window */}
-      <div className={styles.wrapper} ref={wrapperRef}>
-        <div 
-          className={styles.track}
-          style={{ transform: `translateX(-${translateOffset}px)` }}
+      <div className={styles.carouselContainer}>
+        {/* Left Trigger Button */}
+        <button 
+          className={`${styles.navButton} ${styles.prev}`} 
+          onClick={goToPrevious}
+          disabled={currentIndex === 0}
         >
-          {childrenArray.map((child, index) => (
-            <div key={index} className={styles.slide}>
-              {child}
-            </div>
-          ))}
-        </div>
-      </div>
+          ❮
+        </button>
 
-      {/* Right Trigger Button */}
-      <button 
-        className={`${styles.navButton} ${styles.next}`} 
-        onClick={goToNext}
-        disabled={currentIndex >= maxIndex}
-      >
-        &#10095;
-      </button>
+        {/* Main Viewport Window */}
+        <div className={styles.wrapper} ref={wrapperRef}>
+          <div 
+            className={styles.track}
+            style={{ transform: `translateX(-${translateOffset}px)` }}
+          >
+            {childrenArray.map((child, index) => (
+              <div key={index} className={styles.slide}>
+                {child}
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {/* Right Trigger Button */}
+        <button 
+          className={`${styles.navButton} ${styles.next}`} 
+          onClick={goToNext}
+          disabled={currentIndex >= maxIndex}
+        >
+          ❯
+        </button>
+      </div>
     </div>
   );
 }
