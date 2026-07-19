@@ -143,8 +143,13 @@ export default function FavoritesPage() {
 
   return (
     <div className={styles.container}>
-      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '1rem', marginBottom: '1.5rem' }}>
-        <h1 className={styles.title} style={{ margin: 0 }}>Your Favourite Episodes</h1>
+      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', flexWrap: 'wrap', gap: '1rem', marginBottom: '1.5rem' }}>
+        <div style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
+          <h1 className={styles.title} style={{ margin: 0 }}>Your Favourite Episodes</h1>
+          <Link to="/" className={styles.backButton} style={{ marginTop: '0.75rem', display: 'inline-flex', width: 'fit-content' }}>
+            ← Home
+          </Link>
+        </div>
 
         <div className={styles.sortControls}>
           <label htmlFor="favorites-sort">Sort</label>
