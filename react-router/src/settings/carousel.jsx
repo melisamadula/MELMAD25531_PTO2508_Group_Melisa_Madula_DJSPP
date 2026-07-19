@@ -1,6 +1,17 @@
 import React, { useState, useEffect, useRef } from "react";
 import styles from "./carousel.module.css";
 
+/**
+ * An auto-advancing, multi-item slider layout component with responsive item grouping.
+ * Uses a `ResizeObserver` to dynamically update visible column boundaries and adjusts 
+ * translation offsets to prevent sliding past content limitations.
+ *
+ * @component
+ * @param {Object} props - Component properties.
+ * @param {React.ReactNode} props.children - Raw sliding card components or slides to mount inside the track framework.
+ * @param {number} [props.interval=5000] - Continuous slide shifting timer window length defined in milliseconds.
+ * @returns {JSX.Element|null} A responsive slide track viewport with control buttons, or null if children are empty.
+ */
 export default function Carousel({ children, interval = 5000 }) {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [visibleCount, setVisibleCount] = useState(3); // Tracks active responsive columns
@@ -18,6 +29,10 @@ export default function Carousel({ children, interval = 5000 }) {
   useEffect(() => {
     if (!wrapperRef.current) return;
 
+    /**
+     * Measures current bounding layout boxes to compute responsive breakpoints.
+     * @param {ResizeObserverEntry[]} entries - Layout box entry items provided by the ResizeObserver thread.
+     */
     const handleResize = (entries) => {
       for (let entry of entries) {
         const width = entry.contentRect.width;

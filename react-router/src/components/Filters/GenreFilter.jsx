@@ -3,7 +3,13 @@ import { PodcastContext } from "../../context/PodcastContext";
 import styles from "./GenreFilter.module.css";
 
 /**
- * @param {{genres: {id:number,name:string}[]}} props – list of genres from data.
+ * A dropdown filter component for selecting podcast genres.
+ *
+ * @param {Object} props - The component props.
+ * @param {Object[]} props.genres - The array of available genres to display.
+ * @param {number} props.genres[].id - The unique identifier for the genre.
+ * @param {string} props.genres[].title - The display name of the genre.
+ * @returns {JSX.Element} The rendered genre select dropdown.
  */
 export default function GenreFilter({ genres }) {
   const { genre, setGenre } = useContext(PodcastContext);

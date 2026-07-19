@@ -2,6 +2,14 @@ import styles from "./Header.module.css";
 import { Link } from "react-router-dom";
 import { ThemeToggle } from "../../settings/ThemeToggle";
 
+/**
+ * Global navigation header component for the application.
+ * Displays the primary app branding link, structural routing links to the favorites page,
+ * and mounts the application theme configuration selector.
+ *
+ * @component
+ * @returns {JSX.Element} A semantic header bar containing brand identity and navigation links.
+ */
 export default function Header() {
   return (
     <header className={styles.appHeader}>

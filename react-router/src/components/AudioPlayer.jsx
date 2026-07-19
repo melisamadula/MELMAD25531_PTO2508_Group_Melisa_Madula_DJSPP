@@ -2,6 +2,16 @@ import AudioPlayer from "react-h5-audio-player";
 import "react-h5-audio-player/lib/styles.css";
 import { useAudioPlayer } from "../context/AudioPlayerContext";
 
+/**
+ * Global persistent media stream controls layout dashboard.
+ * 
+ * Binds directly to global playback parameters to monitor active source links,
+ * overlaying a sticky, fixed interface block containing tracking text and stream actions.
+ * Automatically strips itself from view space if an active resource is absent.
+ *
+ * @component
+ * @returns {JSX.Element|null} A fixed positioning persistent bottom audio playback controller, or null if no track is active.
+ */
 function AppPlayer() {
   const { currentTrack, stopPlayer } = useAudioPlayer();
 

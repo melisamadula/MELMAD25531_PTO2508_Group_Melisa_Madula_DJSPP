@@ -5,6 +5,13 @@ import { formatDate } from "../../utils/formatDate";
 import GenreTags from "../UI/GenreTags";
 import { useAudioPlayer } from "../../context/AudioPlayerContext";
 
+/**
+ * A decorative component that displays an un-filled heart icon outline.
+ *
+ * @private
+ * @component
+ * @returns {JSX.Element} An un-filled heart shape SVG.
+ */
 // SVG Icons (Fixed XML Namespace strings)
 const HeartEmpty = () => (
   <svg xmlns="http://w3.org" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" style={{ width: '22px', height: '22px' }}>
@@ -12,12 +19,44 @@ const HeartEmpty = () => (
   </svg>
 );
 
+/**
+ * A decorative component that displays a filled red heart icon.
+ *
+ * @private
+ * @component
+ * @returns {JSX.Element} A filled red heart shape SVG.
+ */
 const HeartFilled = () => (
   <svg xmlns="http://w3.org" viewBox="0 0 24 24" fill="currentColor" style={{ width: '22px', height: '22px', color: '#ff4b4b' }}>
     <path d="M11.645 20.91l-.007-.003-.022-.012a15.247 15.247 0 01-.383-.218 25.18 25.18 0 01-4.244-3.17C4.688 15.36 2.25 12.174 2.25 8.25 2.25 5.322 4.714 3 7.688 3c1.749 0 3.3 1.01 4.312 2.733C13.012 4.01 14.562 3 16.313 3c2.973 0 5.437 2.322 5.437 5.25 0 3.925-2.438 7.111-4.739 9.256a25.175 25.175 0 01-4.244 3.17 15.247 15.247 0 01-.383.219l-.022.012-.007.004-.003.001a.752.752 0 01-.704 0l-.003-.001z" />
   </svg>
 );
 
+/**
+ * Detailed view component displaying metadata, seasons, and episodes for a selected podcast.
+ * Handles tracking state indices, playing audio streams, and synchronising favorited episodes with localStorage.
+ *
+ * @component
+ * @param {Object} props - Component properties.
+ * @param {Object} props.podcast - The detailed data object for the selected podcast.
+ * @param {string|number} props.podcast.id - The unique identifier of the podcast show.
+ * @param {string} props.podcast.title - The name of the podcast show.
+ * @param {string} props.podcast.description - A brief text summary describing the podcast.
+ * @param {string} props.podcast.image - URL path to the podcast cover artwork image.
+ * @param {string} props.podcast.updated - ISO date string specifying when the show data was last modified.
+ * @param {Object[]} props.podcast.seasons - An array containing objects representing different show seasons.
+ * @param {string} props.podcast.seasons[].title - The title text allocated to a specific season.
+ * @param {string} props.podcast.seasons[].description - Text content summarizing a single season's theme.
+ * @param {string} props.podcast.seasons[].image - URL string linking to season-specific display graphics.
+ * @param {Object[]} props.podcast.seasons[].episodes - Collection array filled with individual track elements.
+ * @param {string|number} [props.podcast.seasons[].episodes[].id] - Unique id fallback for an episode.
+ * @param {string|number} [props.podcast.seasons[].episodes[].trackId] - Alternative identification tracking key string.
+ * @param {string} props.podcast.seasons[].episodes[].title - Headline text for the specific episode track.
+ * @param {string} props.podcast.seasons[].episodes[].description - Main plot/topic paragraph snippet text.
+ * @param {string} [props.podcast.seasons[].episodes[].file] - Audio file source link path stream location.
+ * @param {Object[]} props.genres - List mapping global system categories for the application tags list layout.
+ * @returns {JSX.Element} Detailed podcast view incorporating header metadata and tabbed episode listings.
+ */
 export default function PodcastDetail({ podcast, genres }) {
   const [selectedSeasonIndex, setSelectedSeasonIndex] = useState(0);
   const [selectedEpisodeIndex, setSelectedEpisodeIndex] = useState(0);
@@ -25,13 +64,13 @@ export default function PodcastDetail({ podcast, genres }) {
   const navigate = useNavigate();
   const { playTrack } = useAudioPlayer();
 
-  // 1. Initialise favorites state from localStorage
+  // Initialise favorites state from localStorage
   const [favorites, setFavorites] = useState(() => {
     const saved = localStorage.getItem('podcast_favorites');
     return saved ? JSON.parse(saved) : [];
   });
 
-  // 2. Sync favorites state updates into localStorage
+  // Sync favorites state updates into localStorage
   useEffect(() => {
     localStorage.setItem('podcast_favorites', JSON.stringify(favorites));
   }, [favorites]);
@@ -46,7 +85,7 @@ export default function PodcastDetail({ podcast, genres }) {
     }
   };
 
-  // 3. Toggle mechanism to add or remove an episode item object
+  // Toggle mechanism to add or remove an episode item object
   const toggleFavorite = (episodeId, event) => {
     event.stopPropagation(); // Prevents clicking the heart from changing the selected card state index
     

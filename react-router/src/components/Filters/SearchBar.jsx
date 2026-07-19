@@ -3,7 +3,11 @@ import { PodcastContext } from "../../context/PodcastContext";
 import styles from "./SearchBar.module.css";
 
 /**
- * Search input with debounced update.
+ * A search input component that provides a debounced update to the global search state.
+ * Delays updating the context by 300ms to prevent rapid, unnecessary re-renders or API calls.
+ *
+ * @component
+ * @returns {JSX.Element} A controlled search input element.
  */
 export default function SearchBar() {
   const { search, setSearch } = useContext(PodcastContext);

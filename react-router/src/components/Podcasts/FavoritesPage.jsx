@@ -4,12 +4,30 @@ import styles from './PodcastDetail.module.css';
 import { useAudioPlayer } from '../../context/AudioPlayerContext';
 import { formatDateTime } from '../../utils/formatDate';
 
+/**
+ * A decorative SVG component that displays a filled heart icon.
+ * Used to indicate active favorite status on items.
+ *
+ * @private
+ * @component
+ * @returns {JSX.Element} A pre-styled, red SVG heart icon element.
+ */
 const HeartFilled = () => (
   <svg xmlns="http://w3.org" viewBox="0 0 24 24" fill="currentColor" style={{ width: '22px', height: '22px', color: '#ff4b4b' }}>
     <path d="M11.645 20.91l-.007-.003-.022-.012a15.247 15.247 0 01-.383-.218 25.18 25.18 0 01-4.244-3.17C4.688 15.36 2.25 12.174 2.25 8.25 2.25 5.322 4.714 3 7.688 3c1.749 0 3.3 1.01 4.312 2.733C13.012 4.01 14.562 3 16.313 3c2.973 0 5.437 2.322 5.437 5.25 0 3.925-2.438 7.111-4.739 9.256a25.175 25.175 0 01-4.244 3.17 15.247 15.247 0 01-.383.219l-.022.012-.007.004-.003.001a.752.752 0 01-.704 0l-.003-.001z" />
   </svg>
 );
 
+/**
+ * A stateful page view component that manages, organizes, and displays favorited podcast episodes.
+ * 
+ * It reads active identifiers from local storage, dynamically resolves detailed metadata 
+ * across asynchronous remote payloads, handles runtime sorting configurations, and 
+ * maps computed data into a unified, show-grouped presentation layout.
+ *
+ * @component
+ * @returns {JSX.Element} A view containing loader panels, empty state call-to-actions, or grouped favorite episodes.
+ */
 export default function FavoritesPage() {
   const { playTrack } = useAudioPlayer();
 

@@ -3,7 +3,11 @@ import { SORT_OPTIONS, PodcastContext } from "../../context/PodcastContext";
 import styles from "./SortSelect.module.css";
 
 /**
- * Dropdown for choosing sort order.
+ * A dropdown selector component for switching the podcast sorting criteria.
+ * Maps over imported sorting constraints to populate option elements dynamically.
+ *
+ * @component
+ * @returns {JSX.Element} A controlled HTML select dropdown for sort ordering.
  */
 export default function SortSelect() {
   const { sortKey, setSortKey } = useContext(PodcastContext);
