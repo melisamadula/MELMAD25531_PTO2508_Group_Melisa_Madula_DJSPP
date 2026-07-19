@@ -58,7 +58,11 @@ export default function PodcastDetail({ podcast, genres }) {
         return prevFavorites.filter(fav => fav.episodeId !== episodeId);
       } else {
         // Correctly save BOTH IDs so the Favourites Page can find this specific episode easily
-        return [...prevFavorites, { episodeId, showId: podcast.id }];
+        return [...prevFavorites, {
+          episodeId,
+          showId: podcast.id,
+          dateAdded: new Date().toISOString(),
+        }];
       }
     });
   };

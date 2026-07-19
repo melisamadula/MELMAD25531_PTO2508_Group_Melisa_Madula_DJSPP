@@ -259,11 +259,48 @@ strong {
     order: 0;
     width: 100%;
   }
-  .episodeDesc {
-    display: -webkit-box;
-    -webkit-line-clamp: 4;
-    -webkit-box-orient: vertical;
-    overflow: hidden;
-    text-overflow: ellipsis;
-  }
+}
+
+.sortControls {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.sortControls label {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: #333;
+}
+
+.sortSelect {
+  min-width: 190px;
+  border-radius: 6px;
+  border: 1px solid #d1d5db;
+  padding: 0.5rem 0.75rem;
+  background: white;
+  color: #111827;
+}
+
+.groupSection {
+  margin-bottom: 2rem;
+}
+
+.groupHeading {
+  margin-bottom: 1rem;
+  font-size: 1.2rem;
+  color: #111827;
+  border-bottom: 1px solid #e5e7eb;
+  padding-bottom: 0.5rem;
+}
+
+.favoriteMeta,
+.favoriteDate {
+  color: #6b7280;
+  font-size: 0.85rem;
+  margin: 0.35rem 0 0.75rem;
+}
+
+.favoriteDate {
+  font-style: italic;
 }

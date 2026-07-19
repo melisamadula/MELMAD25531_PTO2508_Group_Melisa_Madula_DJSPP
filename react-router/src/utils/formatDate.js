@@ -14,3 +14,14 @@ export function formatDate(isoString) {
     day: "numeric",
   });
 }
+
+export function formatDateTime(isoString) {
+  const date = new Date(isoString);
+  return date.toLocaleString(undefined, {
+    year: "numeric",
+    month: "long",
+    day: "numeric",
+    hour: "numeric",
+    minute: "2-digit",
+  });
+}

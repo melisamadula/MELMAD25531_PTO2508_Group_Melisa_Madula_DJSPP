@@ -1,7 +1,8 @@
-import React, { useState, useEffect } from 'react';
+import React, { useMemo, useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import styles from './PodcastDetail.module.css';
 import { useAudioPlayer } from '../../context/AudioPlayerContext';
+import { formatDateTime } from '../../utils/formatDate';
 
 const HeartFilled = () => (
   <svg xmlns="http://w3.org" viewBox="0 0 24 24" fill="currentColor" style={{ width: '22px', height: '22px', color: '#ff4b4b' }}>
@@ -18,7 +19,33 @@ export default function FavoritesPage() {
   });
 
   const [favoriteEpisodes, setFavoriteEpisodes] = useState([]);
+  const [sortOption, setSortOption] = useState('date_newest');
   const [loading, setLoading] = useState(false);
+
+  const sortedFavorites = useMemo(() => {
+    const items = [...favoriteEpisodes];
+
+    switch (sortOption) {
+      case 'title_asc':
+        return items.sort((a, b) => a.title.localeCompare(b.title));
+      case 'title_desc':
+        return items.sort((a, b) => b.title.localeCompare(a.title));
+      case 'date_oldest':
+        return items.sort((a, b) => new Date(a.dateAdded || 0) - new Date(b.dateAdded || 0));
+      case 'date_newest':
+      default:
+        return items.sort((a, b) => new Date(b.dateAdded || 0) - new Date(a.dateAdded || 0));
+    }
+  }, [favoriteEpisodes, sortOption]);
+
+  const groupedFavorites = useMemo(() => {
+    return sortedFavorites.reduce((groups, episode) => {
+      const showName = episode.showTitle || 'Unknown Show';
+      if (!groups[showName]) groups[showName] = [];
+      groups[showName].push(episode);
+      return groups;
+    }, {});
+  }, [sortedFavorites]);
 
   useEffect(() => {
     if (favorites.length === 0) {
@@ -67,8 +94,13 @@ export default function FavoritesPage() {
                 matched.push({
                   ...episode,
                   id: fav.episodeId,
+                  episodeId: fav.episodeId,
                   showTitle: parentShow.title,
+                  seasonTitle: season.title,
+                  seasonNumber: seasonIndex + 1,
+                  episodeNumber: epIndex + 1,
                   seasonImage: season.image || parentShow.image,
+                  dateAdded: fav.dateAdded,
                 });
               }
             });
@@ -111,8 +143,24 @@ export default function FavoritesPage() {
 
   return (
     <div className={styles.container}>
-      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1.5rem' }}>
+      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '1rem', marginBottom: '1.5rem' }}>
         <h1 className={styles.title} style={{ margin: 0 }}>Your Favourite Episodes</h1>
+
+        <div className={styles.sortControls}>
+          <label htmlFor="favorites-sort">Sort</label>
+          <select
+            id="favorites-sort"
+            value={sortOption}
+            onChange={(e) => setSortOption(e.target.value)}
+            className={styles.sortSelect}
+          >
+            <option value="title_asc">Title A–Z</option>
+            <option value="title_desc">Title Z–A</option>
+            <option value="date_newest">Newest Added</option>
+            <option value="date_oldest">Oldest Added</option>
+          </select>
+        </div>
+
         <button 
           onClick={handleClearAll}
           style={{ background: '#ff4b4b', color: 'white', border: 'none', padding: '8px 16px', borderRadius: '4px', cursor: 'pointer', fontWeight: 'bold' }}
@@ -122,45 +170,52 @@ export default function FavoritesPage() {
       </div>
       
       <div className={styles.seasonDetails}>
-        <div className={styles.episodeList}>
-          {favoriteEpisodes.map((episode) => (
-            <div key={episode.id} className={styles.episodeCard}>
-              
-              <img className={styles.episodeCover} src={episode.seasonImage} alt="" />
+        {Object.entries(groupedFavorites).map(([showTitle, episodes]) => (
+          <section key={showTitle} className={styles.groupSection}>
+            <h2 className={styles.groupHeading}>{showTitle}</h2>
+            <div className={styles.episodeList}>
+              {episodes.map((episode) => (
+                <div key={`${episode.id}-${episode.seasonNumber}`} className={styles.episodeCard}>
+                  <img className={styles.episodeCover} src={episode.seasonImage} alt="" />
 
-              <div className={styles.episodeInfo}>
-                <strong style={{ color: '#0070f3', textTransform: 'uppercase', fontSize: '0.75rem' }}>
-                  {episode.showTitle}
-                </strong>
-                <h4 className={styles.episodeTitle} style={{ marginTop: '4px' }}>
-                  {episode.title}
-                </h4>
-                <p className={styles.episodeDesc}>{episode.description}</p>
-              </div>
+                  <div className={styles.episodeInfo}>
+                    <strong style={{ color: '#0070f3', textTransform: 'uppercase', fontSize: '0.75rem' }}>
+                      {episode.showTitle}
+                    </strong>
+                    <p className={styles.favoriteMeta}>
+                      S{episode.seasonNumber} · Ep{episode.episodeNumber ?? '—'}{episode.seasonTitle ? ` · ${episode.seasonTitle}` : ''}
+                    </p>
+                    <h4 className={styles.episodeTitle} style={{ marginTop: '4px' }}>
+                      {episode.title}
+                    </h4>
+                    <p className={styles.episodeDesc}>{episode.description}</p>
+                    <p className={styles.favoriteDate}>Added {formatDateTime(episode.dateAdded || new Date().toISOString())}</p>
+                  </div>
 
-              <div className={styles.actionsContainer}>
-                <button
-                  onClick={() => removeFavorite(episode.id)}
-                  className={styles.favoriteButton}
-                  aria-label="Remove from favorites"
-                >
-                  <HeartFilled />
-                </button>
+                  <div className={styles.actionsContainer}>
+                    <button
+                      onClick={() => removeFavorite(episode.id)}
+                      className={styles.favoriteButton}
+                      aria-label="Remove from favorites"
+                    >
+                      <HeartFilled />
+                    </button>
 
-                {episode.file && (
-                  <button 
-                    className={styles.playButton}
-                    onClick={() => playTrack(episode.file, `${episode.showTitle} • ${episode.title}`)}
-                    aria-label={`Play ${episode.title}`}
-                  >
-                    ▶
-                  </button>
-                )}
-              </div>
-
+                    {episode.file && (
+                      <button 
+                        className={styles.playButton}
+                        onClick={() => playTrack(episode.file, `${episode.showTitle} • ${episode.title}`)}
+                        aria-label={`Play ${episode.title}`}
+                      >
+                        ▶
+                      </button>
+                    )}
+                  </div>
+                </div>
+              ))}
             </div>
-          ))}
-        </div>
+          </section>
+        ))}
       </div>
     </div>
   );
