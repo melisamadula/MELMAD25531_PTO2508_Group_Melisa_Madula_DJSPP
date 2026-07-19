@@ -6,7 +6,7 @@ export const ThemeToggle = () => {
 
   return (
     <button className={styles.toggleButton} onClick={toggleTheme}>
-      {theme === 'light' ? '🌑 Dark Mode' : '☀️ Light Mode'}
+      {theme === 'light' ? '🌑 Dark' : '☀️ Light'}
     </button>
   );
 };
