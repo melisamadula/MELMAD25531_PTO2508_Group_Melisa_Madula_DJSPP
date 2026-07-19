@@ -53,7 +53,7 @@ We were tasked to build upon our previous project(DJS05), where we were to build
 - API fetching of podcasts too.
 - Responsiveness (changing screen viewing visuals per screen size): desktop, tablet, mobile.
 
-## Vercel App Link 🚀:
+## Vercel App Link 🚀: https://podcast-app-melisa-madula-djspp.vercel.app/
 
 ## Setup ⚙️:
 
