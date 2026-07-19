@@ -11,16 +11,16 @@ strong {
 .header {
   display: flex;
   gap: 2rem;
-  background: white;
+  background: var(--surface-1);
   padding: 2rem;
   border-radius: 8px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  box-shadow: var(--shadow-soft);
   margin-bottom: 2rem;
 }
 .backButton {
   background: none;
   border: none;
-  color: #333;
+  color: var(--text-color);
   font-size: 1rem;
   cursor: pointer;
   margin-bottom: 1rem;
@@ -31,7 +31,7 @@ strong {
 }
 
 .backButton:hover {
-  color: #0070f3;
+  color: var(--accent);
 }
 
 .cover {
@@ -46,10 +46,11 @@ strong {
   font-weight: bold;
   margin-bottom: 0.5rem;
   margin-top: 0px;
+  color: var(--text-strong);
 }
 
 .description {
-  color: #444;
+  color: var(--text-color);
   margin-bottom: 1rem;
 }
 
@@ -61,7 +62,8 @@ strong {
 }
 
 .genreBadge {
-  background-color: #e5e7eb;
+  background-color: var(--surface-3);
+  color: var(--text-color);
   padding: 0.3rem 0.75rem;
   border-radius: 9999px;
   font-size: 0.85rem;
@@ -69,7 +71,7 @@ strong {
 
 .metaInfo p {
   font-size: 0.875rem;
-  color: #555;
+  color: var(--text-color);
   margin: 0.25rem 0;
 }
 
@@ -86,17 +88,16 @@ strong {
 }
 
 .seasonDetails {
-  background: white;
+  background: var(--surface-1);
   padding: 2rem;
   border-radius: 8px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  box-shadow: var(--shadow-soft);
 }
 
 .seasonIntro {
   display: flex;
   justify-content: space-between;
   flex-wrap: wrap;
-  /* align-items: center; */
   gap: 1rem;
   margin-bottom: 2rem;
 }
@@ -110,7 +111,9 @@ strong {
 .dropdown {
   padding: 0.4rem 0.6rem;
   border-radius: 4px;
-  border: 1px solid #ccc;
+  border: 1px solid var(--border-color);
+  background: var(--input-bg);
+  color: var(--text-color);
   min-width: 140px;
   height: 40px;
   order: 2;
@@ -130,7 +133,7 @@ strong {
 }
 
 .releaseInfo {
-  color: #777;
+  color: var(--text-muted);
   font-size: 0.875rem;
   margin-top: 0.5rem;
 }
@@ -143,18 +146,18 @@ strong {
 
 .episodeCard {
   display: flex;
-  background: #f9fafb;
+  background: var(--surface-2);
   padding: 1rem;
-  border: 1px solid #e5e7eb;
+  border: 1px solid var(--surface-border);
   border-radius: 6px;
   transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
 }
 
 .episodeCard:hover {
   transform: translateY(-4px);
-  background: #ffffff;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
-  border-color: #d1d5db;
+  background: var(--surface-1);
+  box-shadow: var(--shadow-soft);
+  border-color: var(--border-color);
 }
 .episodeInfo {
   margin-left: 10px;
@@ -166,8 +169,8 @@ strong {
   align-self: center;
   border: none;
   border-radius: 999px;
-  background: #0070f3;
-  color: white;
+  background: var(--accent);
+  color: #ffffff;
   width: 42px;
   height: 42px;
   cursor: pointer;
@@ -180,7 +183,7 @@ strong {
 
 .playButton:hover {
   transform: scale(1.05);
-  background: #0059c1;
+  background: var(--accent-hover);
 }
 
 .episodeTitle {
@@ -191,7 +194,7 @@ strong {
 }
 
 .episodeDesc {
-  color: #555;
+  color: var(--text-muted);
   font-size: 0.875rem;
 }
 
@@ -270,16 +273,16 @@ strong {
 .sortControls label {
   font-size: 0.9rem;
   font-weight: 600;
-  color: #333;
+  color: var(--text-color);
 }
 
 .sortSelect {
   min-width: 190px;
   border-radius: 6px;
-  border: 1px solid #d1d5db;
+  border: 1px solid var(--border-color);
   padding: 0.5rem 0.75rem;
-  background: white;
-  color: #111827;
+  background: var(--input-bg);
+  color: var(--text-color);
 }
 
 .groupSection {
@@ -289,14 +292,14 @@ strong {
 .groupHeading {
   margin-bottom: 1rem;
   font-size: 1.2rem;
-  color: #111827;
-  border-bottom: 1px solid #e5e7eb;
+  color: var(--text-strong);
+  border-bottom: 1px solid var(--surface-border);
   padding-bottom: 0.5rem;
 }
 
 .favoriteMeta,
 .favoriteDate {
-  color: #6b7280;
+  color: var(--text-muted);
   font-size: 0.85rem;
   margin: 0.35rem 0 0.75rem;
 }

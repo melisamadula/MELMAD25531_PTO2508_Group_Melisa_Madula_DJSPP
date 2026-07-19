@@ -1,31 +1,64 @@
-/**
- * Theme.module.css
- * This CSS module defines the theme variables for light and dark modes.
- * It uses CSS custom properties (variables) to allow easy theming across the application.
- */
-
- /* Define the default theme variables for light mode */
-:root {
-  --bg-color: #ffffff;
-  --text-color: #333333;
+:global(:root) {
+  --bg-color: #f5f7fb;
+  --surface-1: #ffffff;
+  --surface-2: #f3f4f6;
+  --surface-3: #e5e7eb;
+  --text-color: #0f172a;
+  --text-muted: #475569;
+  --text-strong: #111827;
+  --border-color: #d1d5db;
+  --surface-border: #e5e7eb;
+  --header-bg: #ffffff;
+  --header-border: #e5e7eb;
+  --card-bg: #ffffff;
+  --button-bg: #eff6ff;
+  --button-text: #1d4ed8;
+  --input-bg: #ffffff;
+  --shadow: 0 18px 50px rgba(15, 23, 42, 0.08);
+  --shadow-soft: 0 10px 30px rgba(15, 23, 42, 0.06);
+  --accent: #2563eb;
+  --accent-hover: #1d4ed8;
+  --danger: #b91c1c;
+  --danger-bg: #fee2e2;
+  --error-text: #991b1b;
+  --focus-ring: rgba(59, 130, 246, 0.35);
 }
 
-/* Define the theme variables for dark mode */
-[data-theme='dark'] {
-  --bg-color: #121212;
-  --text-color: #e0e0e0;
+:global([data-theme='dark']) {
+  --bg-color: #0f172a;
+  --surface-1: #111827;
+  --surface-2: #1e293b;
+  --surface-3: #334155;
+  --text-color: #f8fafc;
+  --text-muted: #cbd5e1;
+  --text-strong: #ffffff;
+  --border-color: #334155;
+  --surface-border: #334155;
+  --header-bg: #111827;
+  --card-bg: #1f2937;
+  --button-bg: #1e3a8a;
+  --button-text: #f8fafc;
+  --input-bg: #0f172a;
+  --shadow: 0 18px 50px rgba(15, 23, 42, 0.3);
+  --shadow-soft: 0 10px 30px rgba(15, 23, 42, 0.25);
+  --accent: #60a5fa;
+  --accent-hover: #93c5fd;
+  --danger: #fee2e2;
+  --danger-bg: #7f1d1d;
+  --focus-ring: rgba(96, 165, 250, 0.35);
 }
 
-body {
+:global(body) {
   background-color: var(--bg-color);
   color: var(--text-color);
-  transition: all 0.3s ease;
+  transition: background-color 0.3s ease, color 0.3s ease;
+  min-height: 100vh;
 }
 
 .toggleButton {
-  background: var(--button-bg, #f0f0f0);
-  color: var(--text-color);
-  border: 1px solid var(--border-color, #ccc);
+  background: var(--button-bg);
+  color: var(--button-text);
+  border: 1px solid var(--border-color);
   padding: 8px 16px;
   font-size: 0.9rem;
   font-weight: 500;
@@ -34,12 +67,12 @@ body {
   display: inline-flex;
   align-items: center;
   gap: 8px;
-  transition: all 0.2s ease-in-out;
+  transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
 }
 
 .toggleButton:hover {
   transform: translateY(-1px);
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 10px 30px rgba(15, 23, 42, 0.12);
 }
 
 .toggleButton:active {

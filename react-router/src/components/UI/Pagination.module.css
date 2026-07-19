@@ -8,12 +8,13 @@
 .pageButton {
   padding: 0.5rem 0.75rem;
   border-radius: 999px;
-  background-color: #eee;
+  background-color: var(--surface-2);
+  color: var(--text-color);
   font-size: 1rem;
-  border: none;
+  border: 1px solid var(--surface-border);
   cursor: pointer;
 }
 .active {
-  background-color: #2563eb;
-  color: white;
+  background-color: var(--accent);
+  color: #ffffff;
 }

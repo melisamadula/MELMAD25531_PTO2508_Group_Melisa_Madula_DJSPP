@@ -1,6 +1,8 @@
 .select {
   padding: 0.5rem 0.75rem;
-  border: 1px solid #ccc;
+  border: 1px solid var(--border-color);
   border-radius: 0.75rem;
   font-size: 1rem;
+  background: var(--input-bg);
+  color: var(--text-color);
 }

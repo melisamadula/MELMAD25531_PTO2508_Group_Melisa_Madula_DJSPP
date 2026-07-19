@@ -1,10 +1,12 @@
 .searchInput {
   width: 100%;
   padding: 0.5rem 0.75rem;
-  border: 1px solid #ccc;
+  border: 1px solid var(--border-color);
   border-radius: 0.75rem;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 1px 3px rgba(15, 23, 42, 0.08);
   font-size: 1rem;
+  background: var(--input-bg);
+  color: var(--text-color);
 }
 
 @media (min-width: 768px) {
